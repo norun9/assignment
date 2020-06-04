@@ -44,10 +44,8 @@ func main() {
 
 	//構造体初期化の要素数を可変長にしたい
 	//オブジェクト{}が一つだけだとout of indexのエラーが起きる
+	//ここさえリファクタしたらOK!!!!
 	words := []Words{{},{},{},{}}
-	//words := []Words{}
-	fmt.Println(words[0])
-	fmt.Println(lists[0][0])
 
 	for i, value := range lists{
 		v := value
@@ -55,17 +53,15 @@ func main() {
 		words[i].Name = &v[0]
 		words[i].Length = &l
 	}
-	fmt.Println(*words[0].Name)
 
-
-	for _, w := range words{
-		fmt.Print(*w.Name)
-		fmt.Print(*w.Length)
-		fmt.Println("\n")
-	}
+	//for _, w := range words{
+	//	fmt.Print(*w.Name)
+	//	fmt.Print(*w.Length)
+	//	fmt.Println("\n")
+	//}
 
 	sort.Slice(words, func(i, j int) bool {
-		return *words[i].Length < *words[j].Length
+		return *words[i].Length > *words[j].Length
 	})
 	for _, w := range words {
 		fmt.Println(*w.Name)
