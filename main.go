@@ -7,6 +7,11 @@ import (
 	"strings"
 )
 
+type Words struct {
+	Name *string
+	Length *int
+}
+
 func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
 	b := string(body)
@@ -24,20 +29,19 @@ func main() {
 		//fmt.Println(sameStrSlice)
 		lists = append(lists, sameStrSlice)
 	}
-	fmt.Println(lists)
-}
+	fmt.Println(len(lists))
+	var length int = len(lists)
+	hoges := make([]Words, int(length))
+	for i, value := range lists{
+		v := value
+		l := len(value)
+		hoges[i].Name = &v[0]
+		hoges[i].Length = &l
+	}
 
-type Words struct {
-	Name string
-	Length int
-}
-
-func (w Words) String() string{
-	return w.Name
-}
-
-type ByLen []Words
-
-func (l ByLen) Len() int {
-	return len(l)
+	for _, hoge := range hoges{
+		fmt.Print(*hoge.Name)
+		fmt.Print(*hoge.Length)
+		fmt.Print(" ")
+	}
 }
