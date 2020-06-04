@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -18,16 +19,9 @@ func (word Words) String() *string {
 
 type perLength []Words
 
-func (length perLength) Len() int {
-	return len()
+func (l perLength) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
 }
-
-func (a ByMass) Len() int           { return len(a) }
-func (a ByMass) Less(i, j int) bool { return a[i].Mass < a[j].Mass }
-func (a ByMass) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-
-
-
 
 func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
@@ -45,18 +39,37 @@ func main() {
 		lists = append(lists, sameStrSlice)
 	}
 
-	var length int = len(lists)
-	WordSlice := make([]Words, int(length))
+	//var length int = len(lists)
+	//WordSlice := make([]Words, int(length))
+
+	//構造体初期化の要素数を可変長にしたい
+	//オブジェクト{}が一つだけだとout of indexのエラーが起きる
+	words := []Words{{},{},{},{}}
+	//words := []Words{}
+	fmt.Println(words[0])
+	fmt.Println(lists[0][0])
+
 	for i, value := range lists{
 		v := value
 		l := len(value)
-		WordSlice[i].Name = &v[0]
-		WordSlice[i].Length = &l
+		words[i].Name = &v[0]
+		words[i].Length = &l
 	}
+	fmt.Println(*words[0].Name)
 
-	for _, w := range WordSlice{
+
+	for _, w := range words{
 		fmt.Print(*w.Name)
 		fmt.Print(*w.Length)
 		fmt.Println("\n")
 	}
+
+	sort.Slice()
+
+
+
+
+
+
+
 }
