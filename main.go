@@ -12,6 +12,23 @@ type Words struct {
 	Length *int
 }
 
+func (word Words) String() *string {
+	return word.Name
+}
+
+type perLength []Words
+
+func (length perLength) Len() int {
+	return len()
+}
+
+func (a ByMass) Len() int           { return len(a) }
+func (a ByMass) Less(i, j int) bool { return a[i].Mass < a[j].Mass }
+func (a ByMass) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+
+
+
+
 func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
 	b := string(body)
@@ -25,23 +42,21 @@ func main() {
 		if sameStrSlice[0] == ""{
 			sameStrSlice = append(sameStrSlice[:0], sameStrSlice[1:]...)
 		}
-		//fmt.Println(len(sameStrSlice))
-		//fmt.Println(sameStrSlice)
 		lists = append(lists, sameStrSlice)
 	}
-	fmt.Println(len(lists))
+
 	var length int = len(lists)
-	hoges := make([]Words, int(length))
+	WordSlice := make([]Words, int(length))
 	for i, value := range lists{
 		v := value
 		l := len(value)
-		hoges[i].Name = &v[0]
-		hoges[i].Length = &l
+		WordSlice[i].Name = &v[0]
+		WordSlice[i].Length = &l
 	}
 
-	for _, hoge := range hoges{
-		fmt.Print(*hoge.Name)
-		fmt.Print(*hoge.Length)
-		fmt.Print(" ")
+	for _, w := range WordSlice{
+		fmt.Print(*w.Name)
+		fmt.Print(*w.Length)
+		fmt.Println("\n")
 	}
 }
