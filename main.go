@@ -59,9 +59,12 @@ func main() {
 			if *prev.Length == *current.Length{
 
 			}
-			prev = current
-		fmt.Print(*words[j].Name)
-		fmt.Println("\n")
+
+		fmt.Printf("前の要素数：%v\n",*prev.Name)
+		fmt.Printf("今の要素数：%v\n",*current.Name)
+		prev = current
+		//fmt.Print(*words[j].Name)
+		//fmt.Println("\n")
 	}
 
 	//アルファベット順にするから3回で限定してはいけない
