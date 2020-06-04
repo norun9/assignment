@@ -47,20 +47,26 @@ func main() {
 		words[i].Length = &l
 	}
 
-	//for _, w := range words{
-	//	fmt.Print(*w.Name)
-	//	fmt.Print(*w.Length)
-	//	fmt.Println("\n")
-	//}
-
 	sort.Slice(words, func(i, j int) bool {
 		return *words[i].Length > *words[j].Length
 	})
 
-	for i:=0; i<3; i++{
-		fmt.Println(*words[i].Name)
+	//一番初めは0番目の要素のLengthに設定
+	prev :=  words[0]
+	for j:=0; j<len(words);j++ {
+			current := words[j]
+			//今と一つ前の要素数が同じなら二つを比較してアルファベット順にする
+			if *prev.Length == *current.Length{
+
+			}
+			prev = current
+		fmt.Print(*words[j].Name)
+		fmt.Println("\n")
 	}
-	//for _, w := range words {
-	//	fmt.Println(*w.Name)
+
+	//アルファベット順にするから3回で限定してはいけない
+	//for i:=0; i<3; i++{
+	//	fmt.Println(*words[i].Name)
+	//	fmt.Println(*words[i].Length)
 	//}
 }
