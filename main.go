@@ -28,14 +28,15 @@ func main() {
 		}
 		lists = append(lists, sameStrSlice)
 	}
-
+	
 	//var length int = len(lists)
 	//WordSlice := make([]Words, int(length))
 
 	//構造体初期化の要素数を可変長にしたい
 	//オブジェクト{}が一つだけだとout of indexのエラーが起きる
 	//ここさえリファクタしたらOK!!!!
-	words := []Words{{},{},{},{}}
+	//words := []Words{{},{},{},{}}
+	words := make([]Words, len(lists))
 
 	for i, value := range lists{
 		v := value
