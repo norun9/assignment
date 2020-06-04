@@ -64,12 +64,10 @@ func main() {
 		fmt.Println("\n")
 	}
 
-	sort.Slice()
-
-
-
-
-
-
-
+	sort.Slice(words, func(i, j int) bool {
+		return *words[i].Length < *words[j].Length
+	})
+	for _, w := range words {
+		fmt.Println(*w.Name)
+	}
 }
