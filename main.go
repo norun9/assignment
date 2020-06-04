@@ -13,16 +13,6 @@ type Words struct {
 	Length *int
 }
 
-func (word Words) String() *string {
-	return word.Name
-}
-
-type perLength []Words
-
-func (l perLength) Swap(i, j int) {
-	l[i], l[j] = l[j], l[i]
-}
-
 func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
 	b := string(body)
@@ -63,7 +53,11 @@ func main() {
 	sort.Slice(words, func(i, j int) bool {
 		return *words[i].Length > *words[j].Length
 	})
-	for _, w := range words {
-		fmt.Println(*w.Name)
+
+	for i:=0; i<3; i++{
+		fmt.Println(*words[i].Name)
 	}
+	//for _, w := range words {
+	//	fmt.Println(*w.Name)
+	//}
 }
