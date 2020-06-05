@@ -9,7 +9,7 @@ import (
 )
 
 type Words struct {
-	Name *string
+	Name   *string
 	Length *int
 }
 
@@ -29,14 +29,6 @@ func main() {
 		lists = append(lists, sameStrSlice)
 	}
 
-	//var length int = len(lists)
-	//WordSlice := make([]Words, int(length))
-
-	//構造体初期化の要素数を可変長にしたい
-	//オブジェクト{}が一つだけだとout of indexのエラーが起きる
-	//ここさえリファクタしたらOK!!!!
-	//words := []Words{{},{},{},{}}
-
 	//スライス構造体の初期化で要素数を可変長にする
 	words := make([]Words, len(lists))
 
@@ -48,42 +40,17 @@ func main() {
 	}
 
 	sort.Slice(words, func(i, j int) bool {
-		return *words[i].Length > *words[j].Length
+		if *words[i].Length > *words[j].Length {
+			return true
+		} else if *words[i].Length == *words[j].Length {
+			if *words[j].Name > *words[i].Name {
+				return true
+			}
+		}
+		return false
 	})
 
-	//一番初めは0番目の要素のLengthに設定
-	//fmt.Println(len(words))
-	prev :=  words[0]
-	num := 0
-	for j:=0; j<len(words);j++ {
-			current := words[j]
-			//今と一つ前の要素数が同じなら二つを比較してアルファベット順にする
-
-			if *prev.Length == *current.Length{
-				fmt.Print(*words[j].Name)
-				//num += 1
-				//var keys []string
-				//for _,k := range words {
-				//	keys = append(keys, )
-				//}
-				//sort.Strings(keys)
-				//for _, k := range keys {
-				//	fmt.Println(k)
-				//}
-			}else{
-
-			}
-		//fmt.Println(*words[j].Name)
-		//fmt.Printf("今の要素数：%v\n",*current.Length)
-		//fmt.Printf("前の要素数：%v\n",*prev.Length)
-		prev = current
-
-		//fmt.Println("\n")
-	}
-
-	//アルファベット順にするから3回で限定してはいけない
 	for i:=0; i<3; i++{
-		//fmt.Println(*words[i].Name)
-		//fmt.Println(*words[i].Length)
+		fmt.Println(*words[i].Name)
 	}
 }
