@@ -1,50 +1,56 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
+	"fmt"
+	"sort"
 	"strings"
 )
+
+type Words struct {
+	Name   *string
+	Length *int
+}
 
 func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
 	b := string(body)
 	//"."で区切って同じ文字の配列を作成
-	slice := strings.Split(b, ".")
+	newSlice := strings.Split(b, ".")
 
-	lists := [][]string{}
+	wordsSlice := [][]string{}
 	//最後に空白が入るため-1をしている(要リファクタリング)
-	for i := 0; i<len(slice)-1; i++{
-		sameStrSlice := strings.Split(slice[i], " ")
-		if sameStrSlice[0] == ""{
-			sameStrSlice = append(sameStrSlice[:0], sameStrSlice[1:]...)
+	for i:=0; i<len(newSlice)-1; i++{
+		collectSameWords := strings.Split(newSlice[i], " ")
+		if collectSameWords[0] == ""{
+			collectSameWords = append(collectSameWords[:0], collectSameWords[1:]...)
 		}
-		//fmt.Println(len(sameStrSlice))
-		//fmt.Println(sameStrSlice)
-		lists = append(lists, sameStrSlice)
+		wordsSlice = append(wordsSlice, collectSameWords)
 	}
-	fmt.Println(len(lists)+1)
-	rank := [][]string{}
-	fmt.Printf("配列listsの要素数：%d\n", len(lists))
-	var prev int =  len(lists[0])
 
-	for j := 0; j < len(lists); j++{
-		//fmt.Printf("配列listsの要素：%v\n", lists[j])
-		//fmt.Printf("配列内の要素数：%v\n",len(lists[j]))
-		fmt.Printf("now word：%v\n",lists[j][0])
+	//スライス構造体の初期化で要素数を可変長にする
+	words := make([]Words, len(wordsSlice))
 
-		current := len(lists[j])
-		fmt.Printf("前の要素数：%v\n",prev)
-		fmt.Printf("今の要素数：%v\n",current)
-		if current > prev {
-			rank = append([][]string{lists[j]}, rank...)
-		//}else{
-		//
+	for i, value := range wordsSlice{
+		v := value
+		l := len(value)
+		words[i].Name = &v[0]
+		words[i].Length = &l
+	}
+
+	sort.Slice(words, func(i, j int) bool {
+		if *words[i].Length > *words[j].Length {
+			return true
+		} else if *words[i].Length == *words[j].Length {
+			if *words[i].Name < *words[j].Name {
+				return true
+			}
 		}
-		prev = current
+		return false
+	})
+
+	for i:=0; i<3; i++{
+		fmt.Println(*words[i].Name)
 	}
-	fmt.Println(rank)
-
-
 }
