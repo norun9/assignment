@@ -17,22 +17,22 @@ func main() {
 	body, _ := ioutil.ReadAll(os.Stdin)
 	b := string(body)
 	//"."で区切って同じ文字の配列を作成
-	slice := strings.Split(b, ".")
+	newSlice := strings.Split(b, ".")
 
-	lists := [][]string{}
+	wordsSlice := [][]string{}
 	//最後に空白が入るため-1をしている(要リファクタリング)
-	for i := 0; i<len(slice)-1; i++{
-		sameStrSlice := strings.Split(slice[i], " ")
-		if sameStrSlice[0] == ""{
-			sameStrSlice = append(sameStrSlice[:0], sameStrSlice[1:]...)
+	for i:=0; i<len(newSlice)-1; i++{
+		collectSameWords := strings.Split(newSlice[i], " ")
+		if collectSameWords[0] == ""{
+			collectSameWords = append(collectSameWords[:0], collectSameWords[1:]...)
 		}
-		lists = append(lists, sameStrSlice)
+		wordsSlice = append(wordsSlice, collectSameWords)
 	}
 
 	//スライス構造体の初期化で要素数を可変長にする
-	words := make([]Words, len(lists))
+	words := make([]Words, len(wordsSlice))
 
-	for i, value := range lists{
+	for i, value := range wordsSlice{
 		v := value
 		l := len(value)
 		words[i].Name = &v[0]
@@ -43,7 +43,7 @@ func main() {
 		if *words[i].Length > *words[j].Length {
 			return true
 		} else if *words[i].Length == *words[j].Length {
-			if *words[j].Name > *words[i].Name {
+			if *words[i].Name < *words[j].Name {
 				return true
 			}
 		}
