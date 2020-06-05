@@ -32,10 +32,10 @@ func main() {
 	//スライス構造体の初期化で要素数を可変長にする
 	words := make([]Words, len(wordsSlice))
 
-	for i, value := range wordsSlice{
-		v := value
-		l := len(value)
-		words[i].Name = &v[0]
+	for i, word := range wordsSlice{
+		w := word
+		l := len(word)
+		words[i].Name = &w[0]
 		words[i].Length = &l
 	}
 
