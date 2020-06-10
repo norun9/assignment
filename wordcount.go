@@ -22,9 +22,12 @@ func main() {
 	wordsSlice := [][]string{}
 	//最後に空白が入るため-1をしている(要リファクタリング)
 	for i:=0; i<len(newSlice)-1; i++{
+
 		collectSameWords := strings.Split(newSlice[i], " ")
 		if collectSameWords[0] == ""{
+
 			collectSameWords = append(collectSameWords[:0], collectSameWords[1:]...)
+
 		}
 		wordsSlice = append(wordsSlice, collectSameWords)
 	}
