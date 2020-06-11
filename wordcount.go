@@ -1,9 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
-	"fmt"
 	"sort"
 	"strings"
 )
@@ -26,13 +26,13 @@ func main() {
 	//同じ文字同士のスライスを作成する為に、空の多次元スライスを変数wordsSliceで定義
 	wordsSlice := [][]string{}
 
-	for i:=0; i<len(newSlice); i++{
+	for i := 0; i < len(newSlice); i++ {
 
 		//空白を基準に同じ文字同士のスライスを作成
 		collectSameWords := strings.Split(newSlice[i], " ")
 
 		//collectSameWordsの時点で先頭要素が空のスライスが存在するので、条件分岐で先頭要素を削除した後に残りの要素を追加
-		if collectSameWords[0] == ""{
+		if collectSameWords[0] == "" {
 			collectSameWords = append(collectSameWords[:0], collectSameWords[1:]...)
 		}
 		//上記の条件以外通常通りwordsSliceに対してcollectSameWordsスライスを追加
@@ -43,7 +43,7 @@ func main() {
 	//wordsSliceの要素数に応じた数のスライスが作成される
 	words := make([]Words, len(wordsSlice))
 
-	for i, word := range wordsSlice{
+	for i, word := range wordsSlice {
 		//変数wには要素の値を、変数lには各スライス内の要素数を定義
 		w := word
 		l := len(word)
@@ -67,7 +67,7 @@ func main() {
 	})
 
 	//要素の大きさ順かつアルファベット順でソートしたスライスを3つまで順々に表示させる
-	for i:=0; i<3; i++{
+	for i := 0; i < 3; i++ {
 		fmt.Println(*words[i].Name)
 	}
 }
