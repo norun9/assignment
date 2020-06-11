@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type Words struct {
+type Word struct {
 	Name   *string
 	Length *int
 }
@@ -31,25 +31,25 @@ func main() {
 		//空白を基準に同じ文字同士のスライスを作成
 		collectSameWords := strings.Split(newSlice[i], " ")
 
-		//collectSameWordsの時点で先頭要素が空のスライスが存在するので、条件分岐で先頭要素を削除した後に残りの要素を追加
+		//collectSameWordsの時点で先頭要素が空のスライスが存在するので、先頭要素""を削除した残りの要素を追加
 		if collectSameWords[0] == "" {
 			collectSameWords = append(collectSameWords[:0], collectSameWords[1:]...)
 		}
-		//上記の条件以外通常通りwordsSliceに対してcollectSameWordsスライスを追加
+		//上記の条件以外はwordsSliceに対してcollectSameWordsスライスを追加
 		wordsSlice = append(wordsSlice, collectSameWords)
 	}
 
 	//スライス構造体の初期化で要素数を可変長にする
 	//wordsSliceの要素数に応じた数のスライスが作成される
-	words := make([]Words, len(wordsSlice))
+	words := make([]Word, len(wordsSlice))
 
 	for i, word := range wordsSlice {
 		//変数wには要素の値を、変数lには各スライス内の要素数を定義
 		w := word
 		l := len(word)
-		//構造体Wordsの各フィールド名
-		//Nameには要素の値を一つだけ代入(表示させる要素は一つだけで良い為)
-		//Lengthには各スライス内の要素数を代入
+		//構造体Wordの各フィールド名
+		//Nameフィールドには要素の値を一つだけ代入(表示させる要素は一つだけで良い為)
+		//Lengthフィールドには各スライス内の要素数を代入
 		words[i].Name = &w[0]
 		words[i].Length = &l
 	}
