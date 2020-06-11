@@ -20,10 +20,10 @@ func main() {
 	//"."を基準に同じ文字のスライスを作成
 	newSlice := strings.Split(b, ".")
 
-	//newSliceの末尾要素が空白になるので末尾要素を削除してから代入
+	//newSliceの末尾要素が空白になるので末尾要素を削除してから再代入
 	newSlice = newSlice[:len(newSlice)-1]
 
-	//同じ文字同士のスライスを作成する為に、空の多次元スライスを変数wordsSliceで初期化
+	//同じ文字同士のスライスを作成する為に、空の多次元スライスを変数wordsSliceで定義
 	wordsSlice := [][]string{}
 
 	for i:=0; i<len(newSlice); i++{
@@ -43,7 +43,6 @@ func main() {
 	//wordsSliceの要素数に応じた数のスライスが作成される
 	words := make([]Words, len(wordsSlice))
 
-	// wordsSliceの要素を一つずつ取り出す
 	for i, word := range wordsSlice{
 		//変数wには要素の値を、変数lには各スライス内の要素数を定義
 		w := word
