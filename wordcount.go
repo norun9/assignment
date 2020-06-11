@@ -20,7 +20,7 @@ func main() {
 	//"."を基準に同じ文字のスライスを作成
 	newSlice := strings.Split(b, ".")
 
-	//newSliceの末尾要素が空白になるので末尾要素を削除してから再代入
+	//newSliceの末尾要素が空白になるので末尾要素以外を再代入
 	newSlice = newSlice[:len(newSlice)-1]
 
 	//同じ文字同士のスライスを作成する為に、空の多次元スライスを変数wordsSliceで定義
@@ -66,6 +66,7 @@ func main() {
 		return false
 	})
 
+	//TOP3表示
 	//要素の大きさ順かつアルファベット順でソートしたスライスを3つまで順々に表示させる
 	for i := 0; i < 3; i++ {
 		fmt.Println(*words[i].Name)
